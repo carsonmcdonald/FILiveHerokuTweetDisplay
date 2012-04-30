@@ -39,7 +39,6 @@ mongo.Db.connect (uristring, function (err, db) {
       console.log ("Success connecting to " + mongoUrl.protocol + "//" + mongoUrl.hostname + ".");
 
       io.sockets.on('connection', function (socket) {
-          //var latest = collection.find({}).sort({ '$natural': -1 }).limit(10);
           var latest = collection.find({}).sort({ 'created_at': -1 }).limit(10);
           
           latest.toArray(function(err, ldocs) {

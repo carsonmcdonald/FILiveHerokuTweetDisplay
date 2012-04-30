@@ -21,9 +21,9 @@
         }
 
         if(mediaURL != null) {
-          $('#tweets').prepend('<li><table><tr><td><img src="' + data['user_profile_image_url'] + '"/></td><td><p>' + data['user_name'] + ' <a href="http://twitter.com/' + data['user_screen_name'] + '"><span class="handle">@' + data['user_screen_name'] + '</span></a></p><div>' + data['text'] + '</div></td></tr><tr><td>&nbsp;</td><td><img src="' + mediaURL + '"/></td></table></li>');
+          $('#tweets').prepend('<li><table><tr><td><img width="48" height="48" src="' + data['user_profile_image_url'] + '"/></td><td><p>' + data['user_name'] + ' <a href="http://twitter.com/' + data['user_screen_name'] + '"><span class="handle">@' + data['user_screen_name'] + '</span></a></p><div>' + data['text'] + '</div></td></tr><tr><td>&nbsp;</td><td><img src="' + mediaURL + '"/></td></table></li>');
         } else {
-          $('#tweets').prepend('<li><table><tr><td><img src="' + data['user_profile_image_url'] + '"/></td><td><p>' + data['user_name'] + ' <a href="http://twitter.com/' + data['user_screen_name'] + '"><span class="handle">@' + data['user_screen_name'] + '</span></a></p><div>' + data['text'] + '</div></td></tr></table></li>');
+          $('#tweets').prepend('<li><table><tr><td><img width="48" height="48" src="' + data['user_profile_image_url'] + '"/></td><td><p>' + data['user_name'] + ' <a href="http://twitter.com/' + data['user_screen_name'] + '"><span class="handle">@' + data['user_screen_name'] + '</span></a></p><div>' + data['text'] + '</div></td></tr></table></li>');
         }
 
         if($('#tweets li').length > 9) {
