@@ -1,0 +1,43 @@
+<html>
+<head>
+  <style>
+    ul#tweets {list-style-type:none}
+    ul#tweets li {width:500px;border-bottom:1px solid #aaa;padding-bottom:3px;}
+    ul#tweets li img {padding:5px; max-width:400px;}
+    ul#tweets li p {padding:5 0 2 0;margin:0;font-weight:bold;}
+    ul#tweets a {text-decoration: none;}
+    .handle {color:#777}
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+   $().ready(function() {
+
+      var socket = io.connect('/');
+      socket.on('data', function (data) {
+        var mediaURL = null;
+        if(data['entities'] != null && data['entities']['media'] != null && data['entities']['media'][0]['type'] == 'photo') {
+          mediaURL = data['entities']['media'][0]['media_url_https'];
+        }
+
+        if(mediaURL != null) {
+          $('#tweets').prepend('<li><table><tr><td><img src="' + data['user_profile_image_url'] + '"/></td><td><p>' + data['user_name'] + ' <a href="http://twitter.com/' + data['user_screen_name'] + '"><span class="handle">@' + data['user_screen_name'] + '</span></a></p><div>' + data['text'] + '</div></td></tr><tr><td>&nbsp;</td><td><img src="' + mediaURL + '"/></td></table></li>');
+        } else {
+          $('#tweets').prepend('<li><table><tr><td><img src="' + data['user_profile_image_url'] + '"/></td><td><p>' + data['user_name'] + ' <a href="http://twitter.com/' + data['user_screen_name'] + '"><span class="handle">@' + data['user_screen_name'] + '</span></a></p><div>' + data['text'] + '</div></td></tr></table></li>');
+        }
+
+        if($('#tweets li').length > 9) {
+          $('#tweets li').each(function(n, item) {
+             if(n > 9) $(item).remove();
+          });
+        }
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <ul id="tweets">
+  </ul>
+</body>
+</html>
